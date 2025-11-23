@@ -1,6 +1,3 @@
-Here is the **README.md** written as **code block** so you can copy-paste directly:
-
-````md
 # 📥 Telegram Video Downloader Bot
 
 A simple Telegram bot that downloads videos using **yt-dlp** and sends them back to users (max 50MB).  
@@ -109,7 +106,3 @@ project/
 | Instant failure            | Invalid URL                     | Check the link            |
 
 ---
-
-
-```
-
