@@ -1,19 +1,11 @@
-# youtube_bot
-
-This telegram bot base on python and allow you to download videos from YouTube.
-There are three option:
-1. Download entire videos on a youtube channel
-2. Download choosen number of videos base on your key word
-3. Download specific video
-
-
-## To start :
-1. Make your own telegram bon ot from Botfather
-2. Paste token on telegram_youtube.py on line 9
-3. Run the bot
-
-## Required libraries:
-Beautifulsoup : 'pip install beautifulsoup4' for linux 'pip3 install beautifulsoup4'
-Python-telegram-bot : 'pip install python-telegram-bot' for linux 'pip3 install python-telegram-bot'
-Scrapetube : 'pip install scrapetube' for linux 'pip3 install scrapetube'
-Pytube : 'pip install pytube' for linux 'pip3 install pytube'
+🤖 Telegram Video Downloader Bot (yt-dlp)This is a simple, asynchronous Telegram bot built with python-telegram-bot that allows users to download videos from various platforms (like YouTube, Vimeo, etc.) using the powerful yt-dlp library. The bot is designed to handle downloads in a separate thread to prevent blocking and respects Telegram's 50MB file size limit.✨ FeaturesURL Processing: Accepts any video URL supported by the yt-dlp library.Asynchronous Downloads: Uses a ThreadPoolExecutor to handle blocking download tasks without freezing the main bot thread.Progress Updates: Provides real-time download percentage, speed, and ETA updates to the user.50MB Limit: Automatically caps downloads at 50MB to comply with Telegram's file size restrictions.Automatic Cleanup: Deletes the downloaded video file from the server immediately after successful or failed upload attempts to save disk space.Cookie Support: Can use an optional cookies.txt file for downloading videos that require sign-in (e.g., age-restricted content).🛠️ Requirements and SetupPrerequisitesPython 3.xFFmpeg (Recommended, as yt-dlp often requires it for format conversions).Installation (Ubuntu/Debian): sudo apt install ffmpegInstallationClone the Repository (or create the file):git clone https://github.com/alwalid54321/youtube_downloader_telegram_bot
+cd telegram_downloader_bot
+Create a Virtual Environment (Highly Recommended):python3 -m venv venv
+source venv/bin/activate
+Create requirements.txt:python-telegram-bot
+yt-dlp
+Install Dependencies:pip install -r requirements.txt
+ConfigurationThe bot requires your Telegram Bot Token.Get a Token: Talk to BotFather on Telegram to create a new bot and get your token.Set Environment Variable (Recommended): The bot is configured to read the token from an environment variable named BOT_TOKEN.export BOT_TOKEN="YOUR_ACTUAL_BOT_TOKEN_HERE"
+(If the environment variable is not set, the bot will fall back to a hardcoded token.)🚀 Running the BotLocally (Development)Activate your virtual environment and run the script:source venv/bin/activate
+python3 main.py
+On a VPS (Production)For continuous, background operation on a VPS, it is highly recommended to use a process manager like Systemd or Supervisor.⚙️ UsageStart: Send the /start command to your bot.Download: Paste a valid video URL (e.g., a YouTube link) into the chat.Watch: The bot will send status updates (Downloading..., Uploading...) and finally send the video file.Advanced: Using CookiesIf you need to download content that requires a login (e.g., private videos or age-restricted content), create a file named cookies.txt in the same directory as your bot script. This file should contain cookies exported from your browser. The yt-dlp library will automatically detect and use it.
