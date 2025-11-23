@@ -1,56 +1,115 @@
-🤖 Telegram Video Downloader Bot (yt-dlp)
-This is a simple, asynchronous Telegram bot built with python-telegram-bot that allows users to download videos from various platforms (like YouTube, Vimeo, etc.) using the powerful yt-dlp library. The bot is designed to handle downloads in a separate thread to prevent blocking and respects Telegram's 50MB file size limit.
-✨ Features
-URL Processing: Accepts any video URL supported by the yt-dlp library.
-Asynchronous Downloads: Uses a ThreadPoolExecutor to handle blocking download tasks without freezing the main bot thread.
-Progress Updates: Provides real-time download percentage, speed, and ETA updates to the user.
-50MB Limit: Automatically caps downloads at 50MB to comply with Telegram's file size restrictions.
-Automatic Cleanup: Deletes the downloaded video file from the server immediately after successful or failed upload attempts to save disk space.
-Cookie Support: Can use an optional cookies.txt file for downloading videos that require sign-in (e.g., age-restricted content).
-🛠️ Requirements and Setup
-Prerequisites
-Python 3.x
-FFmpeg (Recommended, as yt-dlp often requires it for format conversions).
-Installation (Ubuntu/Debian): sudo apt install ffmpeg
-Installation
-Clone the Repository (or create the file):
-git clone https://github.com/alwalid54321/youtube_downloader_telegram_bot
-cd telegram_downloader_bot
+Here is the **README.md** written as **code block** so you can copy-paste directly:
+
+````md
+# 📥 Telegram Video Downloader Bot
+
+A simple Telegram bot that downloads videos using **yt-dlp** and sends them back to users (max 50MB).  
+Built using **python-telegram-bot v21+** with async support and threaded downloading.
+
+---
+
+## 🚀 Features
+
+- Download videos from YouTube and many other sites  
+- Real-time progress updates (percentage, speed, ETA)  
+- Automatic upload after download completes  
+- Max file size limited to **50MB**  
+- Uses thread executor to avoid blocking the bot  
+- Optional `cookies.txt` support for restricted videos  
+- Handles errors cleanly (invalid URL, large file, login required)
+
+---
+
+## 📦 Requirements
+
+Install dependencies:
+
+```bash
+pip install python-telegram-bot==21.4 yt-dlp
+````
+
+(Optional) If downloading login-required videos:
+
+* Place a file named `cookies.txt` in the bot directory
+* Export from browser using extensions like “Get Cookies.txt”
+
+---
+
+## 🔧 Configuration
+
+Set your bot token using environment variable:
+
+```bash
+export BOT_TOKEN="YOUR_TELEGRAM_BOT_TOKEN"
+```
+
+Or modify directly in the code (not recommended for production):
+
+```python
+BOT_TOKEN = "your-token-here"
+```
+
+---
+
+## ▶️ Running the Bot
+
+Run the bot with:
+
+```bash
+python main.py
+```
+
+You should see:
+
+```
+Bot is polling...
+```
+
+Now the bot is active.
+
+---
+
+## 🧩 Usage
+
+1. Open your bot in Telegram
+2. Send any **direct video link** (YouTube, Twitter, etc.)
+3. Bot downloads and sends a video file back
+4. If the file exceeds 50MB, you will receive a warning message
+
+---
+
+## 📁 File Structure
+
+```
+project/
+│── main.py
+│── cookies.txt   (optional)
+│── README.md
+└── requirements.txt (optional)
+```
+
+---
+
+## ⚠️ Notes
+
+* Telegram bots cannot upload files larger than 50MB
+* Some YouTube videos require login; use cookies.txt
+* If the bot stops updating progress, Telegram rate limits may apply
+* Avoid too many concurrent downloads (limit is set to 4 threads)
+
+---
+
+## 🛠️ Troubleshooting
+
+| Problem                    | Cause                           | Fix                       |
+| -------------------------- | ------------------------------- | ------------------------- |
+| “Sign-in required”         | Age-restricted or private video | Add cookies.txt           |
+| “File is larger than 50MB” | Video too big                   | Choose lower quality link |
+| Bot freezes at download    | Slow internet or blocked region | Try with cookies          |
+| Instant failure            | Invalid URL                     | Check the link            |
+
+---
 
 
-Create a Virtual Environment (Highly Recommended):
-python3 -m venv venv
-source venv/bin/activate
+```
 
-
-Create requirements.txt:
-python-telegram-bot
-yt-dlp
-
-
-Install Dependencies:
-pip install -r requirements.txt
-
-
-Configuration
-The bot requires your Telegram Bot Token.
-Get a Token: Talk to BotFather on Telegram to create a new bot and get your token.
-Set Environment Variable (Recommended): The bot is configured to read the token from an environment variable named BOT_TOKEN.
-export BOT_TOKEN="YOUR_ACTUAL_BOT_TOKEN_HERE"
-
-(If the environment variable is not set, the bot will fall back to a hardcoded token.)
-🚀 Running the Bot
-Locally (Development)
-Activate your virtual environment and run the script:
-source venv/bin/activate
-python3 main.py
-
-
-On a VPS (Production)
-For continuous, background operation on a VPS, it is highly recommended to use a process manager like Systemd or Supervisor.
-⚙️ Usage
-Start: Send the /start command to your bot.
-Download: Paste a valid video URL (e.g., a YouTube link) into the chat.
-Watch: The bot will send status updates (Downloading..., Uploading...) and finally send the video file.
-Advanced: Using Cookies
-If you need to download content that requires a login (e.g., private videos or age-restricted content), create a file named cookies.txt in the same directory as your bot script. This file should contain cookies exported from your browser. The yt-dlp library will automatically detect and use it.
